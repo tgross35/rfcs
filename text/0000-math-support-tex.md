@@ -1,20 +1,40 @@
-- Feature Name: (fill me in with a unique ident, `my_awesome_feature`)
-- Start Date: (fill me in with today's date, YYYY-MM-DD)
+- Feature Name: `rustdoc_math_support`
+- Start Date: 2022-08-16
 - RFC PR: [rust-lang/rfcs#0000](https://github.com/rust-lang/rfcs/pull/0000)
 - Rust Issue: [rust-lang/rust#0000](https://github.com/rust-lang/rust/issues/0000)
 
 # Summary
 [summary]: #summary
 
-One paragraph explanation of the feature.
+This RFC allows the rendering of math equations in rustdoc. These can be wrapped in `$`/`$` for inline equations,
+or `$$`/`$$` for block display style.
 
 # Motivation
 [motivation]: #motivation
 
-Why are we doing this? What use cases does it support? What is the expected outcome?
+A lot of documented topics can benefit from being able to clearly express mathematical
+equations, and being able to do so easily greatly benefits communities working on
+mathematical, scientific, and engineering fields.
+
+The current workaround is to include a header that enables `KaTeX`, but this is
+difficult to implement correctly.
 
 # Guide-level explanation
 [guide-level-explanation]: #guide-level-explanation
+
+If you are 
+
+```rust
+//! To use the 
+//!
+//! $A^b mod p = g^{ab}$
+//!
+//!
+//!
+```
+$A^b mod p = g^{ab}$
+
+[tex_math_wiki]: https://en.wikibooks.org/wiki/LaTeX/Mathematics
 
 Explain the proposal as if it was already included in the language and you were teaching it to another Rust programmer. That generally means:
 
@@ -29,18 +49,26 @@ For implementation-oriented RFCs (e.g. for compiler internals), this section sho
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
 
-This is the technical portion of the RFC. Explain the design in sufficient detail that:
+This proposal recommends implementing math equations via the popular library
+[mathjax][mathjax]. This was the choice of both StackOverflow and GitHub.
 
-- Its interaction with other features is clear.
-- It is reasonably clear how the feature would be implemented.
-- Corner cases are dissected by example.
+Implementation is fairly simple: the following header needs to be added:
 
-The section should return to the examples given in the previous section, and explain more fully how the detailed proposal makes those examples work.
+```html
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+```
+
+- This is the library used by both StackOverflow and Github
+- As it is popular, it is likely to be cached
+
+
+[mathjax]: https://www.mathjax.org/
 
 # Drawbacks
 [drawbacks]: #drawbacks
 
-Why should we *not* do this?
+There is some overhead to loading the additional script. To mitigate this, 
 
 # Rationale and alternatives
 [rationale-and-alternatives]: #rationale-and-alternatives
@@ -75,6 +103,16 @@ Please also take into consideration that rust sometimes intentionally diverges f
 
 # Future possibilities
 [future-possibilities]: #future-possibilities
+
+It may be good to add 
+
+```tex
+\[E=mc^2\]
+
+\begin{equation}
+E=mc^2
+\end{equation}
+```
 
 Think about what the natural extension and evolution of your proposal would
 be and how it would affect the language and project as a whole in a holistic
