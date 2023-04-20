@@ -7,25 +7,25 @@
 
 [summary]: #summary
 
-The goal of this RFC is to define a way to 
+The goal of this RFC is to define a way for `rustdoc` to get configuration
+information located in `Cargo.toml` without needing to parse the file itself, as
+well as create a `rustdoc` configuration file format. The result is that
+`rustdoc` will be able to produce a user-facing description of Cargo features, and have the ability to easily be extended by more metadata in the future.
 
-
-This RFC has three simple goals:
-
-2. Establish a way for Cargo or other build systems to easily pass advanced
-   configuration information to `rustdoc` (e.g., favicon or playground URLs from
-   `Cargo.toml`)
-3. Allow `rustdoc` to accept this information either from the CLI or from a new
-   `rustdoc.toml` file.
-
-The outcome is that `rustdoc` will gain the ability to document cargo features
-and get its configuration from `Cargo.toml`, without having any awareness of
-Cargo project structure itself. There will also be room to grow for more
-advanced configuration options.
+While targeting `rustdoc`, it is also a partial goal of this RFC to produce
+guidelines that may work for other default tooling (`rustfmt`, `clippy`), and
+possibly be extended in the future to accommodate community tooling.
 
 # Motivation
 
 [motivation]: #motivation
+
+The `feature-metadata` RFC will provide a way to document information about
+features in a `Cargo.toml` manifest file. `rustdoc` needs some way to consume
+that information.
+
+
+
 
 Currently, `docs.rs` provides a basic view of available feature flags on a
 rather simple page: for example, [`tokio`]. It is helpful as a quick overview of
@@ -46,8 +46,7 @@ This RFC provides a way to solve both problems: it specifies a way to add
 user-facing metadata to cargo features, and specifies how that and other
 information should be passed to `rustdoc`.
 
-[`tokio`]: https://docs.rs/crate/tokio/latest/features
-[`clap`'s derive information]: https://docs.rs/clap/4.2.2/clap/_derive/index.html
+
 
 # Guide-level explanation
 
@@ -330,3 +329,8 @@ Nonblocking:
   
   The ideas in this RFC could also eventually allow `[tools.clippy]`and
   `[tools.rustfmt]` tables to simplify configuration of those tools.
+
+
+[`feature-metadata`]: https://github.com/rust-lang/rfcs/pull/3416
+[`tokio`]: https://docs.rs/crate/tokio/latest/features
+[`clap`'s derive information]: https://docs.rs/clap/4.2.2/clap/_derive/index.html
