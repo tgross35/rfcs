@@ -1,5 +1,5 @@
 - Feature Name: rustdoc-metadata-configuration
-- Start Date: 2023-04-17
+- Start Date: 2023-04-19
 - RFC PR: [rust-lang/rfcs#0000](https://github.com/rust-lang/rfcs/pull/3416)
 - Rust Issue: [rust-lang/rust#0000](https://github.com/rust-lang/rust/issues/0000)
 
@@ -7,7 +7,7 @@
 
 [summary]: #summary
 
-The goal of this RFC is to 
+The goal of this RFC is to define a way to 
 
 
 This RFC has three simple goals:
