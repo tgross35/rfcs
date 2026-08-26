@@ -173,6 +173,22 @@ concerns about bloat, but this is further discussed in
 - Rather than being consistent with `rustdoc` and accepting markdown, should the
   `doc` key be consistent with `package.description` and only support plain
   text? This needs to be a point of discussion before approval of this RFC.
+- What is the best name for the manifest key? `doc` was chosen for consistency
+  with `#[doc(...)]`, but `package.description` and `package.documentation` (a
+  URL) also exist as precedent.
+- How should this be exposed in `cargo metadata` output? One possibility is to
+  extend the existing `features` entry with a parallel structure:
+
+  ```json
+  "features": {
+      "foo": [],
+      "bar": ["foo"]
+  },
+  "features_v2": {
+      "foo": {},
+      "bar": { "enables": ["foo"], "doc": "simple docstring for bar" }
+  }
+  ```
 
 # Future possibilities
 
