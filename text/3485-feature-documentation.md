@@ -72,7 +72,7 @@ See [`feature-metadata`] for information about `enables`.
 [reference-level-explanation]: #reference-level-explanation
 
 The new `doc` key accepts markdown-flavored text, and should be thought of as
-the equivalent to a `#[doc(...)]` attribute. Like doc comments, the first line
+the equivalent to a `#[doc(...)]` attribute. Like doc comments, the first paragraph
 should be treated as a summary. Intra-doc link support is not included in this
 RFC, so they should not be used.
 
