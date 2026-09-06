@@ -170,9 +170,6 @@ concerns about bloat, but this is further discussed in
 
 [unresolved-questions]: #unresolved-questions
 
-- Rather than being consistent with `rustdoc` and accepting markdown, should the
-  `doc` key be consistent with `package.description` and only support plain
-  text? This needs to be a point of discussion before approval of this RFC.
 - What is the best name for the manifest key? `doc` was chosen for consistency
   with `#[doc(...)]`, but `package.description` and `package.documentation` (a
   URL) also exist as precedent.
